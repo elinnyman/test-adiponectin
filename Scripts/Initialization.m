@@ -55,7 +55,6 @@ end
 model=str2func(modelName); % Sets the model as a function.
 pNames=IQMparameters(model); % Gets the parameter names from the model. 
 
-%options = optimset('Algorithm','sqp'); % ta bort?
 if ~exist('wTotalData','var') || isempty(wTotalData) % Sets the choice of datasets to the total, if no other choice is made prior
  wTotalData=1;
 end
@@ -78,6 +77,8 @@ lb=-ub; % Sets the lower bounds.
 
 ub=[ub log([0.7    1+d 1+d 0.23  1     0.1 ])]; % Add upperbounds for the rate corresponding to the half-maximal time, the difference in time between different stimuli, and basal concentrations of Ca, ATP, cAMP
 lb=[lb log([0.0035 1-d 1-d 0.035 1e-3  1e-6])]; % Add lower bounds 
+
+% uncomment to limit cAMP to experimentally determined values
 % lb=[lb log([0.0035 1-d 1-d 0.035 1e-3  0.00198823])]; % Add lower bounds, with limitation on cAMP
 
 chi=chi2inv(0.95,dgf); % Sets the chi2-limit
